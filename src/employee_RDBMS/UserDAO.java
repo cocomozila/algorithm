@@ -4,16 +4,41 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class UserDAO {
-
+	
+	
+	public void insertUserData() {
+		
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.println("회원등록 입니다.");
+		System.out.print("아이디 : ");
+		String id = scan.next();
+		System.out.print("패스워드 : ");
+		String pw = scan.next();
+		System.out.print("Email : ");
+		String email = scan.next();
+		System.out.print("랭크 : ");
+		int rate = scan.nextInt();
+		
+		User e1 = User.builder().
+				user_no(0).
+				user_id(id).
+				user_pw(pw).
+				user_email(email).
+				user_rate(rate).
+				build();
+		
+		insertUser(e1);
+	}
 	
 	public void insertUser(User user) {
 		
 		try {
-			
+						
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			System.out.println("연결 성공");
 			
 			Connection conn =
 			DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/employeesdb", "root", "1234");
@@ -30,7 +55,7 @@ public class UserDAO {
 			ps.close();
 			conn.close();
 			
-			System.out.println("연결종료");			
+			System.out.println(user.getUser_id()+"님의 회원등록을 완료하였습니다.");			
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
