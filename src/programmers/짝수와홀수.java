@@ -6,5 +6,10 @@ public class Â¦¼ö¿ÍÈ¦¼ö {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public String solution(int num) {
+        
+        return num%2==0?"Odd":"Even";
+    }
 
 }
